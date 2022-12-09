@@ -179,14 +179,11 @@ class logger:
     global pollstamp, pollnext, loggnext, dorecord, dologg
 
     ######################################################################
-    #if GPIO.input(36) == GPIO.HIGH:
-    #    self.togglerec()
+    if GPIO.input(36) == GPIO.HIGH and laeuft == False: 
+        self.togglerec()
 
-    GPIO.add_event_detect(36, GPIO.BOTH, callback = self.togglerec,  bouncetime = 200)
-
-
-    #elif GPIO.input(36) == GPIO.LOW and laeuft == True:
-    #    self.togglerec()
+    elif GPIO.input(36) == GPIO.LOW and laeuft == True:
+        self.togglerec()
     ######################################################################
 
     def TempValNtc1(ntv):                                 # NTC 10 kOhm @ 25°C, alt, B25/100=3950
