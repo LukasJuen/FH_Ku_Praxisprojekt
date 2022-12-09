@@ -1,6 +1,6 @@
 #FH Kufstein Praxisprojekt - Wintersemester 2022
 #SPS.bbM.21
-#Raffler Michael und Luukas Juen
+#Michael Raffler und Lukas Juen
 
 
 
