@@ -27,18 +27,27 @@
 import smbus
 import sys
 import os
+
+import RPi.GPIO as GPIO
+import time
+
 from datetime import datetime, date, time, timedelta
 from tkinter import *
 from tkinter import messagebox
 from tkinter import ttk
 from PiLo_Thermistor import PtcTable, NtcTable
 
+# GPIO setup
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(36, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
+
+
 class logger:
 
   def __init__(self,master):
 
     global aktP, minP, maxP, avgP, clearstats, PollInter, LoggInter, UnitPulse, FactPulse, TimPuFact
-    global TempSense, SlaveAddr, dorecord, dologg, pollnext, loggnext
+    global TempSense, SlaveAddr, dorecord, dologg, pollnext, loggnext, laueft
     global LiconP, LiconR, IconAct, IconNoAct, MeasInter, StatReset, PiLoFont, WorkDir
     global PtcTable, PtcTablePointer, NtcTable, NtcTablePointer
     
@@ -86,6 +95,7 @@ class logger:
 
     dorecord = False
     dologg = False
+    laeuft = False
 #    with open(WorkDir+'/logdata.csv','a') as datafile:
 #      line = 'Timestamp;microsec;Mom [°C];Avg [°C];Min [°C];Max [°C];Mom [{0}];Avg [{0}];Min [{0}];Max [{0}];\
 #Mom [V];Avg [V];Min [V];Max [V];Mom [A];Avg [A];Min [A];Max [A];Mom [W];Avg [W];Min [W];Max [W]'.format(UnitPulse)
@@ -149,6 +159,14 @@ class logger:
     Button(mainframe,height=2,text="Einstellungen",command=self.doeinst).grid(column=2,row=9,sticky=W+E)
     LogButt = Button(mainframe,text="Loggen",image=LiconR,compound=RIGHT,command=self.togglerec)
     LogButt.grid(column=3,row=9,sticky=W+E)
+
+    ######################################################################
+    if GPIO.input(36) == GPIO.HIGH
+        self.togglerec()
+    elif GPIO.input(36) == GPIO.LOW and laeuft == True:
+        self.togglerec()
+    ######################################################################
+
     Button(mainframe,height=2,text="Reset",command=self.reset).grid(column=4,row=9,sticky=W+E)
     Button(mainframe,height=2,text="Stop",command=root.quit).grid(column=5,row=9,sticky=W+E)
 
@@ -522,13 +540,15 @@ class logger:
 
   def togglerec(self):
 
-    global dorecord, dologg, LiconP, LiconR, LogButt, loggnext, WorkDir
+    global dorecord, dologg, LiconP, LiconR, LogButt, loggnext, WorkDir, laeuft
 
     if dorecord:
+      laeuft = False  
       dorecord = False
       dologg = False
       LogButt.configure(image=LiconR)
     else:
+      laeuft = True
       dorecord = True
       dologg = True
       LogButt.configure(image=LiconP)
@@ -538,6 +558,11 @@ class logger:
 Mom [V];Avg [V];Min [V];Max [V];Mom [A];Avg [A];Min [A];Max [A];Mom [W];Avg [W];Min [W];Max [W]'.format(UnitPulse)
         print(line,file=datafile)
       
+
+
+
+
+
 
   def reset(self):
 
