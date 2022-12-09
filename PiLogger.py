@@ -161,8 +161,8 @@ class logger:
     LogButt.grid(column=3,row=9,sticky=W+E)
 
     ######################################################################
-    if GPIO.input(36) == GPIO.HIGH:
-        self.togglerec()
+    #if GPIO.input(36) == GPIO.HIGH:
+    #    self.togglerec()
     #elif GPIO.input(36) == GPIO.LOW and laeuft == True:
     #    self.togglerec()
     ######################################################################
@@ -177,6 +177,17 @@ class logger:
 
     global minP, maxP, aktP, avgP, clearstats, SlaveAddr, TempSense, ActShow, StatReset
     global pollstamp, pollnext, loggnext, dorecord, dologg
+
+    ######################################################################
+    #if GPIO.input(36) == GPIO.HIGH:
+    #    self.togglerec()
+
+    if GPIO.add_event_detect(36, GPIO.BOTH, bouncetime = 200):
+      self.togglerec()
+
+    #elif GPIO.input(36) == GPIO.LOW and laeuft == True:
+    #    self.togglerec()
+    ######################################################################
 
     def TempValNtc1(ntv):                                 # NTC 10 kOhm @ 25°C, alt, B25/100=3950
       v = ntv / 65535
