@@ -1,3 +1,12 @@
+#FH Kufstein Praxisprojekt - Wintersemester 2022
+#SPS.bbM.21
+#Michael Raffler und Lukas Juen
+
+
+
+
+
+
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 # PiLogger Monitor DE, Version 1.3, 2021-11-14
@@ -15,11 +24,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Logdata in Zeile 80, 503, 527
-# Logbutton in Zeile 145, Logbutt
-# dologg und dorecord für taster tauschen
-
-
 import smbus
 import sys
 import os
@@ -33,15 +37,17 @@ from tkinter import messagebox
 from tkinter import ttk
 from PiLo_Thermistor import PtcTable, NtcTable
 
+# GPIO setup
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(36, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
+
 
 class logger:
 
   def __init__(self,master):
 
     global aktP, minP, maxP, avgP, clearstats, PollInter, LoggInter, UnitPulse, FactPulse, TimPuFact
-    global TempSense, SlaveAddr, dorecord, dologg, pollnext, loggnext, laeuft
+    global TempSense, SlaveAddr, dorecord, dologg, pollnext, loggnext,  laeuft
     global LiconP, LiconR, IconAct, IconNoAct, MeasInter, StatReset, PiLoFont, WorkDir
     global PtcTable, PtcTablePointer, NtcTable, NtcTablePointer
     
@@ -81,23 +87,19 @@ class logger:
       FactPulse = 0.2
       UnitPulse = 'm/s'
       PollInter = 1000
-      LoggInter = 1.0
+      LoggInter = 10.0
       StatReset = False
       messagebox.showwarning("Fehler","Fehler beim Lesen von 'PiLogger_Config.txt'")
     pollnext = datetime.now() + timedelta(microseconds=PollInter*1000)
     loggnext = datetime.now()
 
-    dorecord = True
-    dologg = True
+    dorecord = False
+    dologg = False
     laeuft = False
-    with open(WorkDir+'/logdata.csv','a') as datafile:
-      line = 'Timestamp;microsec;Mom [°C];Avg [°C];Min [°C];Max [°C];Mom [{0}];Avg [{0}];Min [{0}];Max [{0}];\
-Mom [V];Avg [V];Min [V];Max [V];Mom [A];Avg [A];Min [A];Max [A];Mom [W];Avg [W];Min [W];Max [W]'.format(UnitPulse)
-      
-        #line = 'Timestamp;microsec;Mom [°C];Avg [°C];Min [°C];Max [°C];Mom [{0}];Avg [{0}];Min [{0}];Max [{0}];\
-#Mom [V];Avg [V];Min [V];Max [V];Mom [A];Avg [A];Min [A];Max [A]'.format(UnitPulse)
-      
-      print(line,file=datafile)
+#    with open(WorkDir+'/logdata.csv','a') as datafile:
+#      line = 'Timestamp;microsec;Mom [°C];Avg [°C];Min [°C];Max [°C];Mom [{0}];Avg [{0}];Min [{0}];Max [{0}];\
+#Mom [V];Avg [V];Min [V];Max [V];Mom [A];Avg [A];Min [A];Max [A];Mom [W];Avg [W];Min [W];Max [W]'.format(UnitPulse)
+#      print(line,file=datafile)
 
     for i in range(len(PtcTable)):
       if PtcTable[i][1] >= 25:
@@ -156,13 +158,15 @@ Mom [V];Avg [V];Min [V];Max [V];Mom [A];Avg [A];Min [A];Max [A];Mom [W];Avg [W];
     
     Button(mainframe,height=2,text="Einstellungen",command=self.doeinst).grid(column=2,row=9,sticky=W+E)
     LogButt = Button(mainframe,text="Loggen",image=LiconR,compound=RIGHT,command=self.togglerec)
+    LogButt.grid(column=3,row=9,sticky=W+E)
+
     ######################################################################
     if GPIO.input(36) == GPIO.HIGH:
         self.togglerec()
     #elif GPIO.input(36) == GPIO.LOW and laeuft == True:
     #    self.togglerec()
     ######################################################################
-    LogButt.grid(column=3,row=9,sticky=W+E)
+
     Button(mainframe,height=2,text="Reset",command=self.reset).grid(column=4,row=9,sticky=W+E)
     Button(mainframe,height=2,text="Stop",command=root.quit).grid(column=5,row=9,sticky=W+E)
 
@@ -542,12 +546,12 @@ Mom [V];Avg [V];Min [V];Max [V];Mom [A];Avg [A];Min [A];Max [A];Mom [W];Avg [W];
       laeuft = False  
       dorecord = False
       dologg = False
-      LogButt.configure(image=LiconP)
+      LogButt.configure(image=LiconR)
     else:
       laeuft = True
       dorecord = True
       dologg = True
-      LogButt.configure(image=LiconR)
+      LogButt.configure(image=LiconP)
       loggnext = datetime.now()
       with open(WorkDir+'/logdata.csv','a') as datafile:
         line = 'Timestamp;microsec;Mom [°C];Avg [°C];Min [°C];Max [°C];Mom [{0}];Avg [{0}];Min [{0}];Max [{0}];\
