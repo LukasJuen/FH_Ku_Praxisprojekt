@@ -527,11 +527,11 @@ Mom [V];Avg [V];Min [V];Max [V];Mom [A];Avg [A];Min [A];Max [A];Mom [W];Avg [W];
     if dorecord:
       dorecord = False
       dologg = False
-      LogButt.configure(image=LiconP)
+      LogButt.configure(image=LiconR)
     else:
       dorecord = True
       dologg = True
-      LogButt.configure(image=LiconR)
+      LogButt.configure(image=LiconP)
       loggnext = datetime.now()
       with open(WorkDir+'/logdata.csv','a') as datafile:
         line = 'Timestamp;microsec;Mom [°C];Avg [°C];Min [°C];Max [°C];Mom [{0}];Avg [{0}];Min [{0}];Max [{0}];\
