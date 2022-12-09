@@ -161,7 +161,7 @@ class logger:
     LogButt.grid(column=3,row=9,sticky=W+E)
 
     ######################################################################
-    if GPIO.input(36) == GPIO.HIGH
+    if GPIO.input(36) == GPIO.HIGH:
         self.togglerec()
     elif GPIO.input(36) == GPIO.LOW and laeuft == True:
         self.togglerec()
