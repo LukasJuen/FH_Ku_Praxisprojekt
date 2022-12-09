@@ -1,3 +1,8 @@
+#FH Kufstein Praxisprojekt - Wintersemester 2022
+#SPS.bbM.21
+#Raffler Michael und Luukas Juen
+
+
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 # PiLogger Monitor DE, Version 1.3, 2021-11-14
