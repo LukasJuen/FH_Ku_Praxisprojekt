@@ -87,9 +87,9 @@ class logger:
     dorecord = False
     dologg = False
     with open(WorkDir+'/logdata.csv','a') as datafile:
-      line = 'Timestamp;microsec;Mom [°C];Avg [°C];Min [°C];Max [°C];Mom [{0}];Avg [{0}];Min [{0}];Max [{0}];\
-Mom [V];Avg [V];Min [V];Max [V];Mom [A];Avg [A];Min [A];Max [A];Mom [W];Avg [W];Min [W];Max [W]'.format(UnitPulse)
-      print(line,file=datafile)
+#      line = 'Timestamp;microsec;Mom [°C];Avg [°C];Min [°C];Max [°C];Mom [{0}];Avg [{0}];Min [{0}];Max [{0}];\
+#Mom [V];Avg [V];Min [V];Max [V];Mom [A];Avg [A];Min [A];Max [A];Mom [W];Avg [W];Min [W];Max [W]'.format(UnitPulse)
+#      print(line,file=datafile)
 
     for i in range(len(PtcTable)):
       if PtcTable[i][1] >= 25:
