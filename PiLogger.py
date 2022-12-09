@@ -84,7 +84,7 @@ class logger:
     pollnext = datetime.now() + timedelta(microseconds=PollInter*1000)
     loggnext = datetime.now()
 
-    dorecord = True
+    dorecord = False
     dologg = False
     with open(WorkDir+'/logdata.csv','a') as datafile:
       line = 'Timestamp;microsec;Mom [°C];Avg [°C];Min [°C];Max [°C];Mom [{0}];Avg [{0}];Min [{0}];Max [{0}];\
