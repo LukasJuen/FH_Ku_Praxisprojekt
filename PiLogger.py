@@ -74,7 +74,7 @@ class logger:
       FactPulse = 0.2
       UnitPulse = 'm/s'
       PollInter = 1000
-      LoggInter = 10.0
+      LoggInter = 1.0
       StatReset = False
       messagebox.showwarning("Fehler","Fehler beim Lesen von 'PiLogger_Config.txt'")
     pollnext = datetime.now() + timedelta(microseconds=PollInter*1000)
