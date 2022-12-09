@@ -182,8 +182,8 @@ class logger:
     #if GPIO.input(36) == GPIO.HIGH:
     #    self.togglerec()
 
-    if GPIO.add_event_detect(36, GPIO.BOTH, bouncetime = 200):
-      self.togglerec()
+    GPIO.add_event_detect(36, GPIO.BOTH, callback = self.togglerec,  bouncetime = 200)
+
 
     #elif GPIO.input(36) == GPIO.LOW and laeuft == True:
     #    self.togglerec()
