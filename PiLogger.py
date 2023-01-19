@@ -74,7 +74,7 @@ import shutil
 # GPIO.setup(36, GPIO.IN, pull_up_down = GPIO.PUD_DOWN) # 36 = GPIO16
 input_1 = digitalio.DigitalInOut(board.D16)
 input_1.direction = digitalio.Direction.INPUT
-input_1.pull = digitalio.PULL.UP
+input_1.pull = digitalio.Pull.UP
 
 
 
