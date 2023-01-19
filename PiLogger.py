@@ -29,6 +29,8 @@ import sys
 import os
 
 import RPi.GPIO as GPIO
+import digitalio
+
 import time
 
 from datetime import datetime, date, time, timedelta
@@ -68,8 +70,12 @@ import shutil
 
 
 # GPIO setup
-GPIO.setmode(GPIO.BOARD)
-GPIO.setup(36, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
+# GPIO.setmode(GPIO.BOARD)
+# GPIO.setup(36, GPIO.IN, pull_up_down = GPIO.PUD_DOWN) # 36 = GPIO16
+input_1 = digitalio.DigitalInOut(board.D16)
+input_1.direction = digitalio.Direction.INPUT
+input_1.pull = digitalio.PULL.UP
+
 
 
 class logger:
@@ -209,10 +215,17 @@ class logger:
     global pollstamp, pollnext, loggnext, dorecord, dologg
 
     ######################################################################
-    if GPIO.input(36) == GPIO.HIGH and laeuft == False: 
+    #if GPIO.input(36) == GPIO.HIGH and laeuft == False: 
+    #    self.togglerec()
+
+    #elif GPIO.input(36) == GPIO.LOW and laeuft == True:
+    #    self.togglerec()
+        
+        
+    if input_1.value == True and laeuft == False: 
         self.togglerec()
 
-    elif GPIO.input(36) == GPIO.LOW and laeuft == True:
+    elif input_1.value == False and laeuft == True:
         self.togglerec()
     ######################################################################
 
