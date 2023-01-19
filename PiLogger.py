@@ -125,7 +125,7 @@ def plot_update():
      
     #return data_array
     
-    def make_video(image_list: list, fps: int, exportVideoDir:str):
+ def make_video(image_list: list, fps: int, exportVideoDir:str):
     # Make an empty directort in temp, which we are gonna delete later
     dirpath = tempfile.mkdtemp()  # Example: '/tmp/tmpacxadh7t'
     video_filenames = []
@@ -156,7 +156,7 @@ class logger:
   def __init__(self,master):
 
     global aktP, minP, maxP, avgP, clearstats, PollInter, LoggInter, UnitPulse, FactPulse, TimPuFact
-    global TempSense, SlaveAddr, dorecord, dologg, pollnext, loggnext,  laeuft, t_array = []
+    global TempSense, SlaveAddr, dorecord, dologg, pollnext, loggnext,  laeuft, t_array
     global LiconP, LiconR, IconAct, IconNoAct, MeasInter, StatReset, PiLoFont, WorkDir
     global PtcTable, PtcTablePointer, NtcTable, NtcTablePointer
     
@@ -205,6 +205,7 @@ class logger:
     dorecord = False
     dologg = False
     laeuft = False
+    t_array = []
 #    with open(WorkDir+'/logdata.csv','a') as datafile:
 #      line = 'Timestamp;microsec;Mom [°C];Avg [°C];Min [°C];Max [°C];Mom [{0}];Avg [{0}];Min [{0}];Max [{0}];\
 #Mom [V];Avg [V];Min [V];Max [V];Mom [A];Avg [A];Min [A];Max [A];Mom [W];Avg [W];Min [W];Max [W]'.format(UnitPulse)
@@ -664,7 +665,8 @@ class logger:
 
   def togglerec(self):
 
-    global dorecord, dologg, LiconP, LiconR, LogButt, loggnext, WorkDir, laeuft, t_array = []
+    global dorecord, dologg, LiconP, LiconR, LogButt, loggnext, WorkDir, laeuft, t_array
+    
 
     if dorecord:
       laeuft = False  
@@ -684,14 +686,14 @@ class logger:
 Mom [V];Avg [V];Min [V];Max [V];Mom [A];Avg [A];Min [A];Max [A];Mom [W];Avg [W];Min [W];Max [W]'.format(UnitPulse)
         print(line,file=datafile)
         
-       t1 = time.monotonic() # for determining frame rate
-       try:
+      t1 = time.monotonic() # for determining frame rate
+      try:
           pic= plot_update() # update plot
           img_list.append(pic)
         
         except:
             continue
-          # approximating frame rate
+        # approximating frame rate
         t_array.append(time.monotonic()-t1)
         if len(t_array)>10:
           t_array = t_array[1:] # recent times for frame rate approx
