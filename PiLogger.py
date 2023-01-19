@@ -685,20 +685,24 @@ class logger:
         line = 'Timestamp;microsec;Mom [°C];Avg [°C];Min [°C];Max [°C];Mom [{0}];Avg [{0}];Min [{0}];Max [{0}];\
 Mom [V];Avg [V];Min [V];Max [V];Mom [A];Avg [A];Min [A];Max [A];Mom [W];Avg [W];Min [W];Max [W]'.format(UnitPulse)
         print(line,file=datafile)
-        
+      
       t1 = time.monotonic() # for determining frame rate
       try:
           pic= plot_update() # update plot
           img_list.append(pic)
         
-        except:
-            continue
-        # approximating frame rate
-        t_array.append(time.monotonic()-t1)
-        if len(t_array)>10:
-          t_array = t_array[1:] # recent times for frame rate approx
-        print('Frame Rate: {0:2.1f}fps'.format(len(t_array)/np.sum(t_array)))
+      #except:
+      #    continue
+      #  # approximating frame rate
+      #  t_array.append(time.monotonic()-t1)
+      #  if len(t_array)>10:
+      #      t_array = t_array[1:] # recent times for frame rate approx
+      #  print('Frame Rate: {0:2.1f}fps'.format(len(t_array)/np.sum(t_array)))
 
+      
+      
+        
+      
 
 
 ## End of While
