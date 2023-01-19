@@ -1203,7 +1203,7 @@ def make_video(image_list: list, fps: int, exportVideoDir:str):
 
 t_array = []
 counter=0
-while GPIO.input(36) == GPIO.HIGH:
+while input_1.value == True:
     t1 = time.monotonic() # for determining frame rate
     try:
         pic= plot_update() # update plot
