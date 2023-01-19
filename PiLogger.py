@@ -1120,7 +1120,7 @@ root.destroy()
 
 # Create an empty list to store images
 img_list = []
-exportFolder=r"/home/Pi/Desktop/FH_Ku_Praisprojekt/exportedVideos/"
+exportFolder=r"/home/Pi/Desktop/FH_Ku_Praxisprojekt/exportedVideos/"
 
 exportTmpFolder=tempfile.mkdtemp()
 
