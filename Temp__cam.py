@@ -26,6 +26,12 @@ import numpy as np
 
 import digitalio
 
+# Define input
+input_1 = digitalio.DigitalInOut(board.D16)
+input_1.direction = digitalio.Direction.INPUT
+input_1.pull = digitalio.Pull.UP
+
+
 # Create an empty list to store images
 img_list = []
 exportFolder=r"/home/Pi/Desktop/Test/FH_Ku_Praxisprojekt/exportedVideos/"
