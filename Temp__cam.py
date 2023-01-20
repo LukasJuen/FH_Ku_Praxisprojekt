@@ -24,9 +24,11 @@ import uuid
 from skimage import io
 import numpy as np
 
+import digitalio
+
 # Create an empty list to store images
 img_list = []
-exportFolder=r"/home/Pi/Desktop/Test/exportedVideos/"
+exportFolder=r"/home/Pi/Desktop/Test/FH_Ku_Praxisprojekt/exportedVideos/"
 
 exportTmpFolder=tempfile.mkdtemp()
 
