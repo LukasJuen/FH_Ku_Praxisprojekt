@@ -104,7 +104,7 @@ def make_video(image_list: list, fps: int, exportVideoDir:str):
 
 t_array = []
 counter=0
-while input_1.value == True:
+while counter<10:
     t1 = time.monotonic() # for determining frame rate
     try:
         pic= plot_update() # update plot
