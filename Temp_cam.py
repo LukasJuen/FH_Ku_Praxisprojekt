@@ -104,25 +104,27 @@ def make_video(image_list: list, fps: int, exportVideoDir:str):
 
 t_array = []
 counter=0
-while input_1.value == True:
-    t1 = time.monotonic() # for determining frame rate
-    try:
-        pic= plot_update() # update plot
-        
-        img_list.append(pic)
-        
-        counter=counter+1
-        
-        print(f"Counter {counter}")
 
-        
-    except:
-        continue
-    # approximating frame rate
-    t_array.append(time.monotonic()-t1)
-    if len(t_array)>10:
-        t_array = t_array[1:] # recent times for frame rate approx
-    print('Frame Rate: {0:2.1f}fps'.format(len(t_array)/np.sum(t_array)))
+while True:
+  while input_1.value == True:
+      t1 = time.monotonic() # for determining frame rate
+      try:
+          pic= plot_update() # update plot
 
-## End of While
-make_video(img_list,fps=1,exportVideoDir= exportFolder)
+          img_list.append(pic)
+
+          counter=counter+1
+
+          print(f"Counter {counter}")
+
+
+      except:
+          continue
+      # approximating frame rate
+      t_array.append(time.monotonic()-t1)
+      if len(t_array)>10:
+          t_array = t_array[1:] # recent times for frame rate approx
+      print('Frame Rate: {0:2.1f}fps'.format(len(t_array)/np.sum(t_array)))
+
+  ## End of While
+  make_video(img_list,fps=1,exportVideoDir= exportFolder)
