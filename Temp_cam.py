@@ -102,10 +102,9 @@ def make_video(image_list: list, fps: int, exportVideoDir:str):
     shutil.rmtree(dirpath)
     return videoPath
 
-t_array = []
-counter=0
-
-while True:
+while True:  
+  t_array = []
+  counter=0
   while input_1.value == True:
       t1 = time.monotonic() # for determining frame rate
       try:
@@ -128,3 +127,4 @@ while True:
 
   ## End of While
   make_video(img_list,fps=1,exportVideoDir= exportFolder)
+  img_list.clear()
