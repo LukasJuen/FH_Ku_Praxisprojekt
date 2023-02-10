@@ -1,6 +1,7 @@
 ##########################################
 # MLX90640 Thermal Camera w Raspberry Pi
 # -- 2fps with Interpolation and Blitting
+# Raffler Michael, Lukas Juen 25.01.2023
 ##########################################
 #
 import time,board,busio
